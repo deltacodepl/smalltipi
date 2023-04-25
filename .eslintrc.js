@@ -12,8 +12,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:jsdoc/recommended',
     'plugin:jsx-a11y/recommended',
-    'plugin:testing-library/react',
-    'plugin:jest-dom/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -33,12 +31,21 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/no-unused-prop-types': 0,
     'react/button-has-type': 0,
-    'import/no-extraneous-dependencies': ['error', { devDependencies: ['esbuild.js', '**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}', '**/*.factory.{ts,tsx}', '**/mocks/**', 'tests/**', '**/*.d.ts'] }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['esbuild.js', 'e2e/**', '**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}', '**/*.factory.{ts,tsx}', '**/mocks/**', 'tests/**', '**/*.d.ts'] },
+    ],
     'no-underscore-dangle': 0,
     'arrow-body-style': 0,
     'class-methods-use-this': 0,
     'jsdoc/require-returns': 0,
   },
+  overrides: [
+    {
+      files: ['src/**/__tests__/**/*.[jt]s?(x)', 'src/**/?(*.)+(spec|test).[jt]s?(x)'],
+      extends: ['plugin:testing-library/react', 'plugin:jest-dom/recommended'],
+    },
+  ],
   globals: {
     JSX: true,
     NodeJS: true,
