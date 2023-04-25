@@ -3,8 +3,11 @@ import { test, expect } from '@playwright/test';
 import { testUser } from './helpers/constants';
 import { clearDatabase } from './helpers/db';
 
-test('user should be redirected to /register', async ({ page }) => {
+test.beforeEach(async () => {
   await clearDatabase();
+});
+
+test('user should be redirected to /register', async ({ page }) => {
   await page.goto('/');
 
   await page.waitForURL(/register/);
